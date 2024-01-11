@@ -1,0 +1,52 @@
+Uxvt.font : xft:monospace:size=16
+URxvt.boldFont: xft:monospace:size=16
+URxvt.italicFont: xft:monospace:size=16
+URxvt.boldItalicfont:xft:monospace:size=16 
+*.font: xft:monospace:style=Regular:size=16
+*.boldFont: xft:monospace:style=Bold:size=16
+*.italicFont: xft:monospace:style=Italic:size=16
+*.boldItalicFont: xft:Iosevka:style=Italic:size=16
+URxvt.letterSpace: -2
+URxvt.perl-ext-common: ... , bell-command
+URxvt.scrollBar : false
+!! Colorscheme
+
+! special
+*.foreground: #93a1a1
+*.background: #141c21
+*.cursorColor: #afbfbf
+
+! black
+*.color0: #263640
+*.color8: #4a697d
+
+! red
+*.color1: #d12f2c
+*.color9: #fa3935
+
+! green
+*.color2: #819400
+*.color10: #a4bd00
+
+! yellow
+*.color3: #b08500
+*.color11: #d9a400
+
+! blue
+*.color4: #2587cc
+*.color12: #2ca2f5
+
+! magenta
+*.color5: #696ebf
+*.color13: #8086e8
+
+! cyan
+*.color6: #289c93
+*.color14: #33c5ba
+
+! white
+*.color7: #bfbaac
+*.color15: #fdf6e3URxvt.internalBorder: 10
+Xcursor.theme: macOS-BigSur
+Xcursor.size: 24
+urxvt.perl-ext-common:resize-font
