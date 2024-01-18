@@ -13,8 +13,20 @@ general {
 
 order += "disk /"
 order += "load"
+order += "cpu_temperature 0"
+order += "cpu_usage"
 order += "memory"
+order += "volume master"
+order += "battery 1"
 order += "tztime local"
+
+volume master {
+    format = "VOL %volume "
+    format_muted = "SHUT UP"
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
 
 disk "/" {
         format = "Study Folder : %avail"
@@ -25,7 +37,7 @@ load {
 }
 
 memory {
-        format = "RAM %used / 4 GiB"
+        format = "RAM %used"
         threshold_degraded = "1G"
         format_degraded = "MEMORY < %available"
 }
@@ -33,3 +45,15 @@ memory {
 tztime local {
         format = "%Y-%m-%d %H:%M"
 }
+battery 1 {
+        format = " %status %percentage "
+        last_full_capacity = false
+        integer_battery_capacity = true
+        low_threshold = 20
+        threshold_type = percentage
+	path = /sys/class/power_supply/BAT0/uevent
+}
+cpu_usage {
+        format = "CPU %usage "
+}
+
