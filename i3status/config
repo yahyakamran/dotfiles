@@ -7,53 +7,107 @@
 # If the above line is not correctly displayed, fix your editor first!
 
 general {
-        colors = true
+        output_format = "i3bar"
+        colors = false
         interval = 5
+        color_good = "#aaff00"
+        color_degraded = "#00dddd"
+        color_bad = "#ff8800"
+        markup = "pango"
 }
 
+order += "volume master"
 order += "disk /"
+order += "memory"
 order += "load"
 order += "cpu_temperature 0"
-order += "cpu_usage"
-order += "memory"
-order += "volume master"
+order += "tztime localdate"
 order += "battery 1"
-order += "tztime local"
+order += "tztime localtime"
+order += "wireless _first_"
+order += "ethernet eno16777736"
+# order += "disk /home"
+# order += "ipv6"
+# order += "run_watch VPN"
+# order += "run_watch DHCP"
 
 volume master {
-    format = "VOL %volume "
-    format_muted = "SHUT UP"
-    device = "default"
-    mixer = "Master"
-    mixer_idx = 0
+        format = "<span color='#FFFFFF' size='large'> </span> <span bgcolor='#000000' foreground='white'> %volume </span>"
+        format_muted = "<span color='#D32F2F'> %volume</span>"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
 }
+
+wireless _first_ {
+        format_up = "<span color='#FFFFFF' size='large'> </span> <span bgcolor='#000000' foreground='white'>%quality %essid </span>"
+        format_down = "<span color='#D32F2F'>  Offline</span>"
+}
+
 
 disk "/" {
-        format = "Study Folder : %avail"
-}
-
-load {
-        format = "ZULUM : %1min"
+        format = "<span color='#FFFFFF' size='large'> </span> <span bgcolor='#000000' foreground='white'> %avail </span>"
+        prefix_type = custom
 }
 
 memory {
-        format = "RAM %used"
-        threshold_degraded = "1G"
-        format_degraded = "MEMORY < %available"
+        format = "<span color='#FFFFFF' size='large'> </span> <span bgcolor='#000000' foreground='white'> %used </span>"
+        threshold_degraded = "10%"
+        format_degraded = "MEMORY: %free"
 }
 
-tztime local {
-        format = "%Y-%m-%d %H:%M"
+cpu_temperature 0 {
+        format = "<span color='#FFFFFF' size='large'>󱠇 </span> <span bgcolor='#000000' foreground='white'> %degrees °C </span>"
+        max_threshold = 50
 }
+
+tztime localdate {
+        format = "<span color='#FFFFFF' size='large'> </span> <span bgcolor='#000000' foreground='white'> %a %d-%m-%Y </span>"
+}
+
 battery 1 {
-        format = " %status %percentage "
-        last_full_capacity = false
-        integer_battery_capacity = true
-        low_threshold = 20
-        threshold_type = percentage
-	path = /sys/class/power_supply/BAT0/uevent
+        format = "<span color='#FFFFFF' size='large'>%status</span> <span bgcolor='#000000' foreground='white'> %percentage </span>"
+        format_down = "No battery"
+        status_chr = "⚡ "
+        status_bat = " "
+        status_unk = "? UNK"
+        status_full = "󰂄 FULL"
+        path = "/sys/class/power_supply/BAT0/uevent"
+        low_threshold = 10
+        last_full_capacity = true
 }
+
+tztime localtime {
+        format = "<span color='#FFFFFF' size='large'>  </span><span bgcolor='#000000' foreground='white'> %I:%M %p </span> "
+}
+
+disk "/home" {
+        format = "  %avail "
+        prefix_type = custom
+}
+
+run_watch DHCP {
+        pidfile = "/var/run/dhclient*.pid"
+}
+
+run_watch VPN {
+        pidfile = "/var/run/vpnc/pid"
+}
+
+
+ethernet eno16777736 {
+        # if you use %speed, i3status requires root privileges
+        format_up = " %ip "
+        format_down = "  "
+}
+
 cpu_usage {
-        format = "CPU %usage "
+        format = "  %usage "
 }
+
+load {
+        format = "  %1min "
+        max_threshold = 5
+}
+
 
