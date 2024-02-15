@@ -44,6 +44,8 @@ vim.opt.cursorline = true
 vim.opt.swapfile = false
 -- key maps
 vim.g.mapleader = " "
+vim.keymap.set('n','<leader>nw',vim.cmd.Sex)
+vim.keymap.set('n','<leader>qw',vim.cmd.Ex)
 --harpoon
 vim.api.nvim_set_keymap("n", "<leader>hp", ":History<CR>", { noremap = true })
 -- undotree
