@@ -32,53 +32,53 @@ order += "tztime localdate"
 # order += "run_watch DHCP"
 
 volume master {
-        format = "<span color='#FFFFFF' size='large'> </span> <span bgcolor='#000000' foreground='white'> %volume </span>"
-        format_muted = "<span color='#D32F2F'> %volume</span>"
+        format = "<span color='#FFFFFF' >Volume </span> <span bgcolor='#000000' foreground='white' size='large'>%volume </span>"
+        format_muted = "<span color='#D32F2F'>Muted</span>"
         device = "default"
         mixer = "Master"
         mixer_idx = 0
 }
 
 wireless _first_ {
-        format_up = "<span color='#FFFFFF' size='large'> </span> <span bgcolor='#000000' foreground='white'>%quality %essid </span>"
+        format_up = "<span color='#FFFFFF' >%essid </span> <span bgcolor='#000000' foreground='white' size='large'>%quality </span>"
         format_down = "<span color='#D32F2F'></span>"
 }
 
 
 disk "/" {
-        format = "<span color='#FFFFFF' size='large'> </span> <span bgcolor='#000000' foreground='white'> %avail </span>"
+        format = "<span color='#FFFFFF' >Study folder</span> <span bgcolor='#000000' size='large' foreground='white'> %avail </span>"
         prefix_type = custom
 }
 
 memory {
-        format = "<span color='#FFFFFF' size='large'> </span> <span bgcolor='#000000' foreground='white'> %used </span>"
+        format = "<span color='#FFFFFF'>RAM</span> <span size='large' bgcolor='#000000' foreground='white'> %used </span>"
         threshold_degraded = "10%"
         format_degraded = "MEMORY: %free"
 }
 
 cpu_temperature 0 {
-        format = "<span color='#FFFFFF' size='large'>󱠇 </span> <span bgcolor='#000000' foreground='white'> %degrees °C </span>"
+        format = "<span color='#FFFFFF' >Hotness </span> <span bgcolor='#000000' foreground='white' size='large'> %degrees °C </span>"
         max_threshold = 50
 }
 
 tztime localdate {
-        format = "<span color='#FFFFFF' size='large'> </span> <span bgcolor='#000000' foreground='white'> %a %d-%m-%Y </span>"
+        format = "<span color='#FFFFFF' size='large'></span> <span bgcolor='#000000' foreground='white'> %a %d-%m-%Y </span>"
 }
 
 battery 1 {
-        format = "<span color='#FFFFFF' size='large'>%status</span> <span bgcolor='#000000' foreground='white'> %percentage </span>"
+        format = "<span color='#FFFFFF' >%status</span> <span bgcolor='#000000' foreground='white' size='large'> %percentage </span>"
         format_down = "No battery"
-        status_chr = "⚡ "
-        status_bat = " "
+        status_chr = "Charging"
+        status_bat = "Health "
         status_unk = "? UNK"
-        status_full = "󰂄 FULL"
+        status_full = "FULL"
         path = "/sys/class/power_supply/BAT0/uevent"
         low_threshold = 10
         last_full_capacity = true
 }
 
 tztime localtime {
-        format = "<span color='#FFFFFF' size='large'>  </span><span bgcolor='#000000' foreground='white'> %I:%M %p </span> "
+        format = "<span color='#FFFFFF' size='large'></span><span bgcolor='#000000' foreground='white'> %I:%M %p </span> "
 }
 
 disk "/home" {
@@ -102,10 +102,10 @@ ethernet eno16777736 {
 }
 
 cpu_usage {
-        format = "  %usage "
+        format = "Inches %usage "
 }
 
 load {
-        format = "   %1min "
+        format = "Inches  %1min "
         max_threshold = 5
 }
