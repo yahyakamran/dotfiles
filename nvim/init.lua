@@ -15,6 +15,13 @@ require('packer').startup(function(use)
     use "machakann/vim-highlightedyank"
     use "tpope/vim-fugitive"
     vim.cmd("colorscheme kanagawa")
+    --harpoon
+    use "nvim-lua/plenary.nvim"
+    use {
+        "ThePrimeagen/harpoon",
+        branch = "harpoon2",
+        requires = { {"nvim-lua/plenary.nvim"} }
+    }
     -- LSP:
     use {
      'VonHeikemen/lsp-zero.nvim',
@@ -37,9 +44,8 @@ vim.opt.hlsearch = false
 vim.opt.incsearch = true
 vim.opt.scrolloff = 8
 vim.opt.list = true
-vim.opt.listchars:append('tab:> ')
 vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
+vim.opt.expandtab = false
 vim.opt.cursorline = true
 vim.opt.swapfile = false
 -- key maps
@@ -81,7 +87,7 @@ end)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'tsserver','clangd'},
+  ensure_installed = {'tsserver'},
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()
@@ -108,3 +114,22 @@ cmp.setup({
     ['<C-Space>'] = cmp.mapping.complete(),
   }),
 })
+
+--harpoon
+local harpoon = require("harpoon")
+
+-- REQUIRED
+harpoon:setup()
+-- REQUIRED
+
+vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<C-h>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-j>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-k>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
+
+-- Toggle previous & next buffers stored within Harpoon list
+vim.keymap.set("n", "<C-J>", function() harpoon:list():prev() end)
+vim.keymap.set("n", "<C-K>", function() harpoon:list():next() end)
