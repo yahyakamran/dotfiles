@@ -50,7 +50,7 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal 
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+q kill
@@ -215,7 +215,7 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 
 client.background       #ffffff
 
-bindsym $mod+shift+x exec i3lock 
+bindsym $mod+shift+x exec i3lock
 
 default_border pixel 3
 
