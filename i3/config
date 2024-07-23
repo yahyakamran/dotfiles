@@ -227,7 +227,6 @@ bindsym XF86AudioPrev exec playerctl previous
 
 exec --no-startup-id xset s off -dpms
 
-bindsym XF86MonBrightnessDown exec --no-startup-id xrandr --output eDP1  --brightness 0.5
-bindsym XF86MonBrightnessUp exec --no-startup-id xrandr --output eDP1  --brightness 1
-
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
 bindsym $mod+shift+s exec --no-startup-id scrot ~/Documents/screenshots/%b%d::%H%M%S.png
