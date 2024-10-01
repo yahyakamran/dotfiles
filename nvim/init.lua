@@ -10,11 +10,11 @@ require('packer').startup(function(use)
     }}
     use 'junegunn/fzf'
     use 'junegunn/fzf.vim'
-    use "rebelot/kanagawa.nvim"
     use 'mbbill/undotree'
     use "machakann/vim-highlightedyank"
     use "tpope/vim-fugitive"
-    vim.cmd("colorscheme kanagawa")
+    use "Alligator/accent.vim"
+
     --harpoon
     use "nvim-lua/plenary.nvim"
     use {
@@ -35,6 +35,7 @@ require('packer').startup(function(use)
         {'L3MON4D3/LuaSnip'},
     }}
 end)
+
 --Some VIM PRESETS
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -87,7 +88,6 @@ end)
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'tsserver'},
   handlers = {
     lsp_zero.default_setup,
     lua_ls = function()
@@ -133,3 +133,19 @@ vim.keymap.set("n", "<C-l>", function() harpoon:list():select(4) end)
 -- Toggle previous & next buffers stored within Harpoon list
 vim.keymap.set("n", "<C-J>", function() harpoon:list():prev() end)
 vim.keymap.set("n", "<C-K>", function() harpoon:list():next() end)
+
+--color schemes
+
+vim.cmd[[let g:accent_colour = 'magenta']]
+vim.cmd[[let g:accent_darken = 1]]
+
+vim.cmd [[syntax on]]
+vim.cmd [[set termguicolors]]
+vim.cmd [[colorscheme accent]]
+
+--vim color highlights
+
+vim.cmd [[ highlight HighlightedyankRegion ctermbg=237 guibg=#707070]]
+vim.cmd [[ highlight CurSearch ctermbg=237 guibg=#707070]]
+vim.cmd [[ highlight IncSearch ctermbg=237 guibg=#707070]]
+
