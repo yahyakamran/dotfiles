@@ -8,8 +8,6 @@ require('packer').startup(function(use)
         highlight = {
         enable = true,
     }}
-    use 'junegunn/fzf'
-    use 'junegunn/fzf.vim'
     use 'mbbill/undotree'
     use "machakann/vim-highlightedyank"
     use "tpope/vim-fugitive"
@@ -21,6 +19,14 @@ require('packer').startup(function(use)
         "ThePrimeagen/harpoon",
         branch = "harpoon2",
         requires = { {"nvim-lua/plenary.nvim"} }
+    }
+    --comp-mode
+    use {
+        "ej-shafran/compile-mode.nvim",
+        requires = {
+            "nvim-lua/plenary.nvim",
+            { "m00qek/baleia.nvim", tag = "v1.3.0" },
+        }
     }
     -- LSP:
     use {
@@ -59,15 +65,6 @@ vim.keymap.set('n','<leader>qw',vim.cmd.Ex)
 vim.api.nvim_set_keymap("n", "<leader>hp", ":History<CR>", { noremap = true })
 -- undotree
 vim.keymap.set('n','<leader>u' , vim.cmd.UndotreeToggle)
---fzf finder
--- Open recently used files
-vim.api.nvim_set_keymap("n", "<leader>fr", ":History<CR>", { noremap = true })
--- Open files in same directory as current file
-vim.api.nvim_set_keymap("n", "<leader>ff", ":Files<CR>", { noremap = true })
---copy
-vim.api.nvim_set_keymap("v", "gp", ": %w !xclip -i -sel c<CR><CR>", { noremap = true })
---Open all project files
-vim.api.nvim_set_keymap("n", "<leader>fa", ":Files ~/projects/<CR>", { noremap = true })
 --vim-fugitive
 vim.keymap.set('n','<leader>gc' , vim.cmd.Git)
 -- Open files in same directory as current file
@@ -109,6 +106,14 @@ local harpoon = require("harpoon")
 -- REQUIRED
 harpoon:setup()
 -- REQUIRED
+--
+--comp-mode
+vim.api.nvim_set_keymap("n", "<leader>le", ":Compile<CR>", { noremap = true })
+vim.api.nvim_set_keymap("n", "<leader>el", ":Recompile<CR>", { noremap = true })
+
+vim.g.compile_mode = {
+    baleia_setup = false
+}
 
 vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
 vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
@@ -137,10 +142,8 @@ vim.cmd [[ highlight HighlightedyankRegion ctermbg=237 guibg=#707070]]
 vim.cmd [[ highlight CurSearch ctermbg=237 guibg=#707070]]
 vim.cmd [[ highlight IncSearch ctermbg=237 guibg=#707070]]
 
-
 --netrw
-
 vim.g.netrw_banner = 0
-
-
+--vim "W" to "w" alias
+vim [[ command W w ]]
 
